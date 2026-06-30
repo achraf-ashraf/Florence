@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
@@ -66,13 +66,24 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* CTA (desktop) */}
-          <a
-            href="#contact"
-            className="hidden lg:inline-flex btn-ghost-gold px-5 py-2.5 text-xs font-medium tracking-[0.2em] uppercase rounded-full"
-          >
-            Get in Touch
-          </a>
+                    {/* CTA (desktop) */}
+          <div className="hidden lg:flex items-center gap-3">
+            <a
+              href="/florence-brochure.pdf"
+              download
+              className="btn-ghost-gold px-5 py-2.5 text-xs font-medium tracking-[0.2em] uppercase rounded-full inline-flex items-center gap-2"
+              aria-label="Download corporate profile PDF"
+            >
+              <Download className="h-3.5 w-3.5" />
+              Profile
+            </a>
+            <a
+              href="#contact"
+              className="btn-ghost-gold px-5 py-2.5 text-xs font-medium tracking-[0.2em] uppercase rounded-full"
+            >
+              Get in Touch
+            </a>
+          </div>
 
           {/* Mobile menu trigger */}
           <button
@@ -133,12 +144,22 @@ export function Navbar() {
                   </motion.a>
                 ))}
               </nav>
-              <a
+                            <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
                 className="btn-gold mt-8 px-6 py-3 text-xs tracking-[0.2em] uppercase rounded-full text-center"
               >
                 Get in Touch
+              </a>
+              <a
+                href="/florence-brochure.pdf"
+                download
+                onClick={() => setMobileOpen(false)}
+                className="btn-ghost-gold mt-3 px-6 py-3 text-xs tracking-[0.2em] uppercase rounded-full text-center inline-flex items-center justify-center gap-2"
+                aria-label="Download corporate profile PDF"
+              >
+                <Download className="h-3.5 w-3.5" />
+                Download Profile
               </a>
             </motion.div>
           </>
