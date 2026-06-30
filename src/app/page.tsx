@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import {
   ArrowRight,
   Phone,
@@ -32,14 +32,25 @@ import {
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile once on mount — disables heavy parallax on touch devices
+  useEffect(() => {
+    const check = () =>
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.innerWidth < 768 ||
+      "ontouchstart" in window;
+    setIsMobile(check());
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  // On mobile: no parallax movement (prevents lag). On desktop: subtle parallax.
+  const heroY = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["0%", "40%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-
+  const heroScale = useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [1, 1.1]);
   return (
     <div className="min-h-screen bg-[#0C0C0E] text-[#E2DFD7] overflow-x-hidden">
       <Navbar />
@@ -730,11 +741,11 @@ export default function Home() {
                 </h3>
                 <div className="space-y-3">
                   <a
-                    href="mailto:Florence.laundry.1@gmail.com"
+                    href="mailto:Info@florence.qa"
                     className="flex items-start gap-3 text-sm text-[#E2DFD7]/80 hover:text-[#C5A35A] transition-colors group"
                   >
                     <Mail className="h-4 w-4 text-[#C5A35A] mt-0.5 flex-shrink-0" />
-                    <span className="group-hover:underline">Florence.laundry.1@gmail.com</span>
+                    <span className="group-hover:underline">Info@florence.qa</span>
                     <ChevronRight className="h-4 w-4 text-[#C5A35A] opacity-0 group-hover:opacity-100 transition-opacity ml-auto" />
                   </a>
                   <div className="flex items-start gap-3 text-sm text-[#E2DFD7]/80">
