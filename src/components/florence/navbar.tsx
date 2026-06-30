@@ -100,19 +100,19 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <>
-            <motion.div
+                        <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-[#0C0C0E]/80 backdrop-blur-sm z-[60] lg:hidden"
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-[#0C0C0E]/85 z-[60] lg:hidden"
               onClick={() => setMobileOpen(false)}
             />
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
               className="fixed top-0 right-0 bottom-0 w-[80%] max-w-sm glass-nav z-[70] lg:hidden p-6 flex flex-col"
             >
               <div className="flex items-center justify-between mb-10">
