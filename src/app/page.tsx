@@ -49,7 +49,7 @@ export default function Home() {
   });
   // On mobile: no parallax movement (prevents lag). On desktop: subtle parallax.
   const heroY = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["0%", "40%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const heroOpacity = useTransform(scrollYProgress, [0.4, 1], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [1, 1.1]);
   return (
     <div className="min-h-screen bg-[#0C0C0E] text-[#E2DFD7] overflow-x-hidden">
