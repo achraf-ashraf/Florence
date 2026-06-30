@@ -283,3 +283,37 @@
   mix-blend-mode: overlay;
   z-index: 1;
 }
+/* ============================================================
+   MOBILE PERFORMANCE OPTIMIZATION
+   Disables backdrop-filter (frosted glass blur) on touch devices
+   and small screens. This is the #1 cause of mobile lag.
+   Background colors are kept so cards/panels look almost identical
+   — just without the expensive GPU blur operation.
+   ============================================================ */
+@media (pointer: coarse), (max-width: 768px) {
+  .glass,
+  .glass-light,
+  .glass-nav,
+  .luxury-card,
+  .gold-top-card,
+  .equip-hero {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  /* Slightly more opaque backgrounds to compensate for lost blur */
+  .glass-nav {
+    background: rgba(12, 12, 14, 0.92) !important;
+  }
+  .glass {
+    background: rgba(24, 24, 27, 0.92) !important;
+  }
+  .luxury-card,
+  .gold-top-card {
+    background: rgba(24, 24, 27, 0.95) !important;
+  }
+  /* Disable hover transforms on touch (no hover state on mobile anyway) */
+  .luxury-card:hover,
+  .gold-top-card:hover {
+    transform: none;
+  }
+}
